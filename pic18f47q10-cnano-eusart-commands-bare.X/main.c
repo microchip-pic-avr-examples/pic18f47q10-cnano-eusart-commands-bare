@@ -31,9 +31,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#define PPS_CONFIG_RD0_EUSART2_TX 0x0B
-#define PPS_CONFIG_RD1_EUSART2_RX 0x19
-#define BAUD_RATE_SYNC_0_BRG16_1_FOSC_1MHZ 0x19
 #define MAX_COMMAND_LEN 8
 
 static void CLK_init(void);
@@ -47,52 +44,56 @@ char getch(void);
 
 static void CLK_init(void)
 {   
-    /* Set HFINTOSC as new oscillator source. */
-    OSCCON1 = _OSCCON1_NOSC1_MASK | _OSCCON1_NOSC2_MASK;
-
-    /* Set HFFRQ to 1 MHz. */
-    OSCFRQ = ~_OSCFREQ_HFFRQ_MASK;
+    /* Set HFINTOSC as new oscillator source */
+    OSCCON1bits.NOSC = 0b011;
+    
+    /* Set HFFRQ to 1 MHz */
+    OSCFRQbits.HFFRQ = 0;
 }
 
 static void PORT_init(void)
 {
     /* Configure RD0 as output. */
-    TRISD &= ~_TRISD_TRISD0_MASK;
+    TRISDbits.TRISD0 = 0;
     
     /* Configure RD1 as input. */
-    TRISD |= _TRISD_TRISD1_MASK;
+    TRISDbits.TRISD1 = 1;
     
     /* Configure RE0 as output. */
-    TRISE &= ~_TRISE_TRISE0_MASK;
+    TRISEbits.TRISE0 = 0;
     
     /* Enable RD1 digital input buffers.*/
-    ANSELD &= ~_ANSELD_ANSELD1_MASK;
+    ANSELDbits.ANSELD1 = 0;
 }
 
 static void PPS_init(void) 
 {
-    RD0PPS = PPS_CONFIG_RD0_EUSART2_TX;    
-    RX2PPS = PPS_CONFIG_RD1_EUSART2_RX; 
+    /* RD0 is TX2 */
+    RD0PPS = 0x0B; 
+    /* RX2 is RD1 */
+    RX2PPS = 0x19; 
 }
 
 void EUSART2_init(void)
 {
     /* 16-bit Baud Rate Generator is used */
-    BAUD2CON = _BAUD2CON_BRG16_MASK;
-
+    BAUD2CONbits.BRG16 = 1;
+        
     /* Serial Port Enable and Continuous Receive Enable */
-    RC2STA = _RC2STA_SPEN_MASK | _RC2STA_CREN_MASK;
-            
+    RC2STAbits.SPEN = 1;
+    RC2STAbits.CREN = 1;
+    
     /* Transmit Enable and High Baud Rate Select */
-    TX2STA = _TX2STA_TXEN_MASK | _TX2STA_BRGH_MASK;
-
+    TX2STAbits.TXEN = 1;
+    TX2STAbits.BRGH = 1;
+    
     /* Baud rate 9600 */
-    SP2BRGL = BAUD_RATE_SYNC_0_BRG16_1_FOSC_1MHZ;
+    SP2BRGL = 0x19;
 }
 
 uint8_t EUSART2_read(void)
 {
-    while(!(PIR3 & _PIR3_RC2IF_MASK))
+    while(0 == PIR3bits.RC2IF)
     {
         ;
     }
@@ -102,7 +103,7 @@ uint8_t EUSART2_read(void)
 
 void EUSART2_write(uint8_t txData)
 {
-    while(!(PIR3 & _PIR3_TX2IF_MASK))
+    while(0 == PIR3bits.TX2IF)
     {
         ;
     }
@@ -124,12 +125,12 @@ void executeCommand(char *command)
 {
     if(strcmp(command, "ON") == 0)
     {
-        LATE &= ~_LATE_LATE0_MASK;
+        LATEbits.LATE0 = 0;
         printf("OK, LED ON.\r\n");
     }
     else if (strcmp(command, "OFF") == 0)
     {
-        LATE |= _LATE_LATE0_MASK;
+        LATEbits.LATE0 = 1;
         printf("OK, LED OFF.\r\n");
     } 
     else 
@@ -148,7 +149,9 @@ void main(void)
     EUSART2_init();
     PPS_init();
     PORT_init();
-    LATE &= ~_LATE_LATE0_MASK;
+    
+    /* LED is ON */
+    LATEbits.LATE0 = 0;
     
     while(1) 
     {

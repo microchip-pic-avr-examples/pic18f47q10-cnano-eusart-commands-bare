@@ -181,7 +181,7 @@
         <property key="memories.programmemory.ranges" value="0-1ffff"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/m17336/Documents/pic18f47q10-eusart-tb/persona bb/pic18f47q10-cnano-commands-bare/pic18f47q10-cnano-commands-bare.X/debug/free/pic18f47q10-cnano-commands-bare_ptg"/>
+                  value="C:/Users/m17336/Documents/pic18f47q10-eusart-tb/EBE/pic18f47q10-cnano-eusart-commands-bare/pic18f47q10-cnano-eusart-commands-bare.X/debug/free/pic18f47q10-cnano-eusart-commands-bare_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -354,7 +354,7 @@
         <property key="memories.programmemory.ranges" value="0-1ffff"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/m17336/Documents/pic18f47q10-eusart-tb/persona bb/pic18f47q10-cnano-commands-bare/pic18f47q10-cnano-commands-bare.X/debug/pro/pic18f47q10-cnano-commands-bare_ptg"/>
+                  value="C:/Users/m17336/Documents/pic18f47q10-eusart-tb/EBE/pic18f47q10-cnano-eusart-commands-bare/pic18f47q10-cnano-eusart-commands-bare.X/debug/pro/pic18f47q10-cnano-eusart-commands-bare_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
