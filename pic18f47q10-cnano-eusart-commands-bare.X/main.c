@@ -45,7 +45,7 @@ char getch(void);
 static void CLK_init(void)
 {   
     /* Set HFINTOSC as new oscillator source */
-    OSCCON1bits.NOSC = 0b011;
+    OSCCON1bits.NOSC = 0b110;
     
     /* Set HFFRQ to 1 MHz */
     OSCFRQbits.HFFRQ = 0;
@@ -71,24 +71,26 @@ static void PPS_init(void)
     /* RD0 is TX2 */
     RD0PPS = 0x0B; 
     /* RX2 is RD1 */
-    RX2PPS = 0x19; 
+    RX2PPS = 0b00011001; 
 }
 
 void EUSART2_init(void)
 {
     /* 16-bit Baud Rate Generator is used */
     BAUD2CONbits.BRG16 = 1;
-        
-    /* Serial Port Enable and Continuous Receive Enable */
-    RC2STAbits.SPEN = 1;
-    RC2STAbits.CREN = 1;
-    
-    /* Transmit Enable and High Baud Rate Select */
-    TX2STAbits.TXEN = 1;
-    TX2STAbits.BRGH = 1;
     
     /* Baud rate 9600 */
-    SP2BRGL = 0x19;
+    SP2BRGL = 25;
+    
+    /* Transmit Enable */
+    TX2STAbits.TXEN = 1;
+    /* High Baud Rate Select */
+    TX2STAbits.BRGH = 1;
+    
+    /* Continuous Receive Enable */
+    RC2STAbits.CREN = 1;
+    /* Serial Port Enable */
+    RC2STAbits.SPEN = 1;
 }
 
 uint8_t EUSART2_read(void)
