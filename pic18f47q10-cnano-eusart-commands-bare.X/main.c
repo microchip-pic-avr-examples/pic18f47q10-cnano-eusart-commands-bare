@@ -81,6 +81,7 @@ void EUSART2_init(void)
     
     /* Baud rate 9600 */
     SP2BRGL = 25;
+    SP2BRGH = 0;
     
     /* Transmit Enable */
     TX2STAbits.TXEN = 1;
