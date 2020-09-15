@@ -5,7 +5,7 @@
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f47q10-cnano-eusart-commands-bare",
         "version": "1.0.2",
-        "displayName": "PIC18F47Q10 EUSART Receive Control Commands",
+        "displayName": "EUSART Receive Control Commands",
         "projectName": "pic18f47q10-cnano-eusart-commands-bare",
         "shortDescription": "One important usage of the EUSART represents the implementation of a command line interface. This way, the microcontroller can receive control commands via EUSART. It is convenient to use the line terminator as command delimiter, so for this use case, EUSART will read full lines and then check if the line contains a valid command.",
         "ide": {
@@ -49,7 +49,6 @@
         ],
         "keywords": [
             "Getting Started",
-            "UART",
             "Serial Communication",
             "Bare Metal"
         ],
