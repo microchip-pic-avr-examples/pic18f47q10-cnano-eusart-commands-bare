@@ -1,4 +1,4 @@
-<a href="https://www.microchip.com" rel="nofollow"><img src="./images/MicrochipLogo.png" alt="Microchip Logo" width="300" /></a>
+[![MCHP](images/microchip.png)](https://www.microchip.com)
 
 # PIC18F47Q10 EUSART Receive Control Commands
 
