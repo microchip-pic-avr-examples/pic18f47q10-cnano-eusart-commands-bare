@@ -8,16 +8,14 @@
 
 # Receive Control Commands via EUSART Using the PIC18F47Q10 Microcontroller
 
-This example shows how to implement a command line interface. This way, the microcontroller can receive
-control commands via the EUSART. In this use case, an LED is controlled using commands sent from the
-MPLAB Data Visualizer..
+This example shows how to implement a command line interface, enabling the microcontroller (MCU) to receive control commands via the Enhanced Universal Synchronous Asynchronous Receiver Transmitter (EUSART). In this use case, an LED is controlled using commands sent from the MPLAB® Data Visualizer.
 
 ## Related Documentation
 
 - [TB3282 – Getting Started With UART Using EUSART on PIC18](https://www.microchip.com/en-us/application-notes/tb3282?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08)
 - [PIC18-Q10 Product Family](https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/8-bit-mcus/pic-mcus/pic18f-q10?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08)
 - [PIC18F47Q10 Product Page](https://www.microchip.com/en-us/product/PIC18F47Q10?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08)
-- [PIC18F47Q10 Data Sheet](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/PIC18F26-45-46-Q10-Data-Sheet-40001996E.pdf?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08)
+- [PIC18F47Q10 Data Sheet](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/PIC18F27-47Q10-Micorcontroller-Data-Sheet-DS40002043.pdf?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08)
 - [PIC18F47Q10 Curiosity Nano](https://www.microchip.com/en-us/development-tool/DM182029?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08)
 - [PIC18F47Q10 Code Examples on GitHub](https://github.com/orgs/microchip-pic-avr-examples/repositories?q=pic18f47q10&type=all)
 
@@ -29,38 +27,35 @@ MPLAB Data Visualizer..
 
 ## Hardware Used
 
-- The [PIC18F47Q10 Curiosity Nano](https://www.microchip.com/en-us/development-tool/DM182029?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08) Development Board is used as a test platform:
+- The [PIC18F47Q10 Curiosity Nano](https://www.microchip.com/en-us/development-tool/DM182029?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08) development board is used as a test platform:
 
     ![Shows a picture of the PIC18F47Q10 Curiosity Nano](images/pic18f47q10-curiosity-nano-board.png)
 
 ## Setup
 
-The [PIC18F47Q10 Curiosity Nano](https://www.microchip.com/en-us/development-tool/DM182029?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08) Development Board has an onboard debugger that acts as an USART to USB convertor so no further hardware is needed.
+The [PIC18F47Q10 Curiosity Nano](https://www.microchip.com/en-us/development-tool/DM182029?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_PIC18-Q10&utm_content=pic18f47q10-cnano-eusart-commands-bare-github&utm_bu=MCU08) development board has an on-board debugger that acts as an USART-to-USB convertor so no further hardware is needed.
 
 The following configurations must be made for this project:
 
 | Pin                | Configuration  |
 | :----------------- | :------------- |
-| RD0 (EUSART2 - TX) | Digital Output |
-| RD1 (EUSART2 - RX) | Digital Input  |
-| RE0 (LED0)         | Digital Output |
+| RD0 (EUSART2 - TX) | Digital output |
+| RD1 (EUSART2 - RX) | Digital input  |
+| RE0 (LED0)         | Digital output |
 
 ## Demo
 
-Run the code and configure the Data Visualizer as described in the Technical Brief document. Type commands to be sent to the board. The two available commands are "ON" and "OFF". Observe the LED on the board as it changes its state
-according to the command sent.
+Run the code and configure the Data Visualizer as described in the referenced technical brief document. Type commands to be sent to the board. The two available commands are "ON" and "OFF". Observe the LED on the board as it changes its state according to the command sent. It is convenient to use the line terminator as command delimiter, so for this use case, EUSART will read full lines and then check if the line contains a valid command.
 
 ![Demo in MPLABX Data Visualizer](images/demo.png)
 
 ## Summary
 
-One important usage of the EUSART represents the implementation of a command line interface. This way, the
-microcontroller can receive control commands via EUSART. It is convenient to use the line terminator as command
-delimiter, so for this use case, EUSART will read full lines and then check if the line contains a valid command.
+This demo showcases how EUSART can be used to implement a command line interface, allowing the MCU to receive commands via EUSART.
 
 ## How to Program the Curiosity Nano board
 
-This chapter shows how to use the MPLAB X IDE to program a PIC® device with an `ExampleProject.X`. This can be applied for any other projects.
+This chapter shows how to use the MPLAB X IDE to program a PIC® device with an `ExampleProject.X`. This can be applied to any other projects.
 
 1. Connect the board to the computer.
 
@@ -74,14 +69,14 @@ This chapter shows how to use the MPLAB X IDE to program a PIC® device with an 
 
 4. Clean and build the ExampleProject project.
 
-    Right click on the ExampleProject project and select Clean and Build.
+    Right click the ExampleProject project and select Clean and Build.
 
     ![Clean and Build](images/clean-and-build.png)
 
 5. Select the PIC Curiosity Nano in the Connected Hardware Tool section of the project settings:
 
-    - Right click on the project and click Properties
-    - Click on the arrow under the Connected Hardware Tool
+    - Right click the project and click Properties
+    - Click the arrow under the Connected Hardware Tool
     - Select the PIC Curiosity Nano, click **Apply** and then click **OK**:
 
     ![Select the PIC Curiosity Nano](images/device.png)
